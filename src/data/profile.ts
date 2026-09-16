@@ -4,6 +4,10 @@ export const profile = {
   email: 'jawadiqbal3344@gmail.com',
   location: 'Islamabad, Pakistan',
   timezone: 'UTC +05:00',
+  whatsapp: {
+    number: '+92 303 588 6956',
+    href: 'https://wa.me/923035886956',
+  },
   summary:
     'Lead software engineer building secure SaaS platforms, connected business systems, and practical AI integrations with .NET, React, and AWS.',
   socials: [
@@ -62,4 +66,33 @@ export const expertise = [
       'Cloud deployment, release workflows, and production troubleshooting, with the team practices that keep a codebase maintainable.',
     technologies: ['AWS', 'Docker', 'Kubernetes', 'ECS', 'CI/CD', 'Code review'],
   },
+];
+
+export const process = [
+  {
+    number: '01',
+    title: 'Discover',
+    text: 'Clarify the workflow, the people using it, and the constraints before any code is written.',
+  },
+  {
+    number: '02',
+    title: 'Architect',
+    text: 'Design the interfaces, data model, and integrations so the pieces fit together and stay maintainable.',
+  },
+  {
+    number: '03',
+    title: 'Build',
+    text: 'Implement across the frontend, backend, and cloud with regular reviews and visible progress.',
+  },
+  {
+    number: '04',
+    title: 'Launch & support',
+    text: 'Deploy to production, then keep improving and supporting the system as it grows.',
+  },
+];
+
+export const engagements = [
+  'Project-based builds',
+  'Ongoing retainers',
+  'Contract engineering',
 ];

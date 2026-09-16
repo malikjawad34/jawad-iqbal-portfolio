@@ -5,7 +5,7 @@ import { CinematicHero } from '@/components/cinematic-hero';
 import { ProjectCard } from '@/components/project-card';
 import { ContactCTA } from '@/components/footer';
 import { projects } from '@/data/projects';
-import { expertise, experience } from '@/data/profile';
+import { engagements, experience, expertise, process, profile } from '@/data/profile';
 export default function Home() {
   return (
     <>
@@ -66,6 +66,25 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <section className="credibility" aria-label="Verified track record">
+          <div className="container credibility-inner">
+            <div className="credibility-copy">
+              <SectionLabel>VERIFIED TRACK RECORD</SectionLabel>
+              <p>
+                Every claim on this site is checkable. Review the experience and work through these
+                profiles.
+              </p>
+            </div>
+            <nav className="credibility-links" aria-label="Professional profiles">
+              {profile.socials.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
+                  <span>{s.label}</span>
+                  <Arrow diagonal />
+                </a>
+              ))}
+            </nav>
+          </div>
+        </section>
         <section className="selected-work section-space">
           <div className="container">
             <div className="section-heading">
@@ -121,6 +140,37 @@ export default function Home() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+        <section className="process section-space">
+          <div className="container">
+            <div className="section-heading">
+              <div>
+                <SectionLabel>HOW I WORK</SectionLabel>
+                <h2>
+                  A clear path from
+                  <br />
+                  requirement to production.
+                </h2>
+              </div>
+              <p>
+                Structured delivery that keeps you informed
+                <br className="desktop-break" /> from the first conversation to launch.
+              </p>
+            </div>
+            <div className="process-grid">
+              {process.map((step) => (
+                <article key={step.number}>
+                  <span className="process-number">{step.number}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </article>
+              ))}
+            </div>
+            <p className="process-engagements">
+              <span>Typical engagements</span>
+              {engagements.join(' · ')}
+            </p>
           </div>
         </section>
         <section className="experience section-space">

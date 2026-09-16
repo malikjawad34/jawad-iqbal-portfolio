@@ -32,6 +32,7 @@ export default function Contact() {
           <p>
             Open to selected freelance projects, contracts, and remote engineering opportunities.
           </p>
+          <p className="contact-response">Usually replies within 24 hours.</p>
           <nav className="contact-socials" aria-label="Professional profiles">
             {profile.socials.map((s) => (
               <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">

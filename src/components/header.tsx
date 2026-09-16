@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { Arrow } from './ui';
 const links = [
   { label: 'Work', href: '/work/' },
-  { label: 'Expertise', href: '/#expertise' },
   { label: 'About', href: '/about/' },
 ];
 export function Header() {

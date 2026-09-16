@@ -911,11 +911,11 @@
   .form-actions .button {
     width: 100%;
   }
-  .not-found {
-    padding-block: 70px;
+  .not-found-inner {
+    padding-block: 80px 72px;
   }
-  .not-found h1 {
-    font-size: 45px;
+  .not-found-code {
+    font-size: clamp(84px, 30vw, 150px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1078,5 +1078,46 @@ body {
   }
   .hero h1 {
     font-size: clamp(30px, 9.3vw, 56px);
+  }
+}
+/* Credibility strip, how-I-work process, and CTA details */
+@media (max-width: 800px) {
+  .credibility-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .credibility-links {
+    gap: 18px 28px;
+  }
+  .process-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .cta-action,
+  .cta-meta {
+    align-items: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .credibility-links {
+    gap: 14px 24px;
+  }
+  .credibility-links a {
+    font-size: 15px;
+  }
+  .whatsapp-fab {
+    right: 16px;
+    bottom: 16px;
+    width: 50px;
+    height: 50px;
+  }
+  .whatsapp-fab svg {
+    width: 26px;
+    height: 26px;
   }
 }

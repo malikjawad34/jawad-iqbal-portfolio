@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { profile } from '@/data/profile';
 import { Arrow, SectionLabel } from './ui';
 export function ContactCTA() {
+  const linkedIn = profile.socials.find((s) => s.label === 'LinkedIn');
   return (
     <section className="contact-cta">
       <div className="container cta-inner">
@@ -14,9 +15,20 @@ export function ContactCTA() {
           </h2>
           <p>A new product, a complex integration, or a system ready for its next chapter.</p>
         </div>
-        <Link className="button button-blue" href="/contact/">
-          Discuss your project <Arrow diagonal />
-        </Link>
+        <div className="cta-action">
+          <Link className="button button-blue" href="/contact/">
+            Discuss your project <Arrow diagonal />
+          </Link>
+          <p className="cta-meta">
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            <span>Replies within 24 hours · UTC +05:00</span>
+            {linkedIn && (
+              <a href={linkedIn.href} target="_blank" rel="noopener noreferrer">
+                {linkedIn.label} <Arrow diagonal />
+              </a>
+            )}
+          </p>
+        </div>
       </div>
     </section>
   );
