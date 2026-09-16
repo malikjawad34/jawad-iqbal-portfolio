@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     address: { '@type': 'PostalAddress', addressLocality: 'Islamabad', addressCountry: 'PK' },
   };
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} data-scroll-behavior="smooth">
       <body id="top">
         <a href="#main" className="skip-link">
           Skip to content
