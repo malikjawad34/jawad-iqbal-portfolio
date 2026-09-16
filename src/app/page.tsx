@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Arrow, SectionLabel, Tags } from '@/components/ui';
-import { HeroDiagram } from '@/components/architecture';
+import { CinematicHero } from '@/components/cinematic-hero';
 import { ProjectCard } from '@/components/project-card';
 import { ContactCTA } from '@/components/footer';
 import { projects } from '@/data/projects';
@@ -10,16 +10,16 @@ export default function Home() {
   return (
     <>
       <main id="main">
-        <section className="hero">
+        <section className="hero cinematic-hero">
           <div className="container hero-main">
             <div className="hero-copy">
               <div className="hero-kicker">
                 <span className="tiny-rule" /> LEAD SOFTWARE ENGINEER · ISLAMABAD, PK
               </div>
               <h1>
-                Complex systems.
+                Built for what
                 <br />
-                <span>Clear outcomes.</span>
+                <span>comes next.</span>
               </h1>
               <p>
                 I’m Jawad. I build the software behind ambitious businesses — from secure SaaS
@@ -37,7 +37,7 @@ export default function Home() {
                 <span /> Open to selected freelance & contract work
               </div>
             </div>
-            <HeroDiagram />
+            <CinematicHero />
           </div>
           <div className="container hero-proof">
             <div>
