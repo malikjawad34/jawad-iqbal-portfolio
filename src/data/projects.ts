@@ -18,6 +18,21 @@ export type Project = {
   architectureNote: string;
   scope: string;
   links: { label: string; href: string }[];
+  statusBadge?: {
+    label: string;
+    type: 'live' | 'published' | 'enterprise';
+    href?: string;
+  };
+  tradeoffs?: {
+    title: string;
+    rationale: string;
+  }[];
+  dataFlow?: {
+    step: string;
+    from: string;
+    to: string;
+    detail: string;
+  }[];
 };
 export const projects: Project[] = [
   {
@@ -78,6 +93,28 @@ export const projects: Project[] = [
         href: 'https://contra.com/community/J0mhheVH-chat-clb-secure-saa-s-platform-built',
       },
     ],
+    statusBadge: {
+      label: 'Production SaaS',
+      type: 'enterprise',
+    },
+    tradeoffs: [
+      {
+        title: 'Relational vs. Document Persistence',
+        rationale:
+          'PostgreSQL was chosen over document stores to enforce ACID transaction guarantees across tenant records, service bookings, and operational audit trails.',
+      },
+      {
+        title: 'Centralized Identity via IdentityServer',
+        rationale:
+          'Decoupled identity from core application services, enabling standardized OAuth 2.0 / OIDC tokens across web clients, background jobs, and third-party integrations.',
+      },
+    ],
+    dataFlow: [
+      { step: '01', from: 'React Web Client', to: 'IdentityServer', detail: 'User authentication & PKCE token issuance' },
+      { step: '02', from: 'Authorized Client', to: 'ASP.NET Core API', detail: 'Validated REST requests with scoped claims' },
+      { step: '03', from: 'Application Layer', to: 'PostgreSQL & AWS EKS', detail: 'Transactional state persistence and containerized tasks' },
+      { step: '04', from: 'Service Events', to: 'Twilio & Firebase', detail: 'Customer SMS notifications and real-time push updates' },
+    ],
   },
   {
     slug: 'al-zayed',
@@ -137,6 +174,29 @@ export const projects: Project[] = [
         href: 'https://contra.com/community/sAupIAjh-al-zayed-luggage-tracking-platform-full-stack',
       },
     ],
+    statusBadge: {
+      label: 'Live Platform ↗',
+      type: 'live',
+      href: 'https://zayedluggagetracker.com/',
+    },
+    tradeoffs: [
+      {
+        title: 'Full-Stack TypeScript & TypeORM',
+        rationale:
+          'Utilized TypeScript models with TypeORM across the Node.js API to share domain interfaces, eliminate schema drift, and speed up independent end-to-end delivery.',
+      },
+      {
+        title: 'Dual-Audience Portal with RBAC',
+        rationale:
+          'Engineered discrete access boundaries separating public, unauthenticated tracking queries from sensitive operations dashboards (dispatchers, drivers, reports).',
+      },
+    ],
+    dataFlow: [
+      { step: '01', from: 'Public User', to: 'React Tracking View', detail: 'Submits tracking reference number' },
+      { step: '02', from: 'Operations Team', to: 'Admin Portal', detail: 'Authenticated RBAC access for dispatch and fleet management' },
+      { step: '03', from: 'Client Requests', to: 'Node.js REST API', detail: 'Executes luggage checkpoint updates and route assignments' },
+      { step: '04', from: 'Data Layer', to: 'PostgreSQL (DigitalOcean)', detail: 'Persists status changes, driver logs, and delivery timestamps' },
+    ],
   },
   {
     slug: 'chatclb-gpt',
@@ -194,6 +254,29 @@ export const projects: Project[] = [
         href: 'https://contra.com/community/K4Qg5jZ6-custom-gpt-with-o-auth-and-21',
       },
     ],
+    statusBadge: {
+      label: 'Published GPT Actions',
+      type: 'published',
+      href: 'https://contra.com/community/K4Qg5jZ6-custom-gpt-with-o-auth-and-21',
+    },
+    tradeoffs: [
+      {
+        title: 'Confirmation-Aware Mutating Operations',
+        rationale:
+          'Structured critical operations (e.g. appointment booking, order placement) with explicit two-step user confirmation in OpenAPI schemas to eliminate accidental state mutation via model hallucination.',
+      },
+      {
+        title: 'Granular OpenAPI 3.1.1 Operation Decomposition',
+        rationale:
+          'Segmented 21 business capabilities into modular operation definitions with strict parameter schemas, minimizing prompt context tokens while ensuring deterministic model tool-calling accuracy.',
+      },
+    ],
+    dataFlow: [
+      { step: '01', from: 'User Prompt', to: 'Custom GPT Agent', detail: 'Natural language intent parsing & parameter extraction' },
+      { step: '02', from: 'GPT Engine', to: 'OpenAPI 3.1.1 Contract', detail: 'Action schema selection & input constraint validation' },
+      { step: '03', from: 'OpenAI Gateway', to: 'OAuth 2.0 Auth', detail: 'User-scoped bearer token attachment via OIDC' },
+      { step: '04', from: 'API Layer', to: 'ChatCLB Core Services', detail: 'Authoritative backend execution & structured status response' },
+    ],
   },
   {
     slug: 'sserp',
@@ -245,6 +328,29 @@ export const projects: Project[] = [
       },
       { label: 'Visit platform sign-in', href: 'https://app.dhtr.org/' },
     ],
+    statusBadge: {
+      label: 'Enterprise ERP',
+      type: 'enterprise',
+      href: 'https://app.dhtr.org/',
+    },
+    tradeoffs: [
+      {
+        title: 'Stateless JWT Claims vs. Session State',
+        rationale:
+          'Adopted cryptographically signed JWT authorization tokens to enable stateless horizontal scaling across AWS ECS task containers without Redis session clustering overhead.',
+      },
+      {
+        title: 'Relational Schema Design in SQL Server',
+        rationale:
+          'Engineered normalized relational models with foreign-key constraints and targeted indexation to support rigorous institutional accounting and audit transparency.',
+      },
+    ],
+    dataFlow: [
+      { step: '01', from: 'Authorized User', to: 'React ERP Interface', detail: 'Authenticates via enterprise single-page portal' },
+      { step: '02', from: 'Web Client', to: 'ASP.NET Core Gateway', detail: 'Sends cryptographically verified JWT authorization header' },
+      { step: '03', from: 'Services', to: 'SQL Server', detail: 'Executes transactional accounting workflows & inventory records' },
+      { step: '04', from: 'Container Host', to: 'AWS ECS & CloudWatch', detail: 'Runs containerized service replicas with performance monitoring' },
+    ],
   },
   {
     slug: 'academic-management',
@@ -290,6 +396,28 @@ export const projects: Project[] = [
     scope:
       'This was enhancement work on an existing platform. It is presented as a contribution, not a claim of building the entire system from scratch.',
     links: [],
+    statusBadge: {
+      label: 'Institutional Platform',
+      type: 'enterprise',
+    },
+    tradeoffs: [
+      {
+        title: 'Query Optimization with Entity Framework',
+        rationale:
+          'Refactored data access paths using projection queries (`Select`) and eager loading (`Include`) to resolve N+1 latency issues on high-volume student attendance lookups.',
+      },
+      {
+        title: 'Non-Breaking Modular Extension',
+        rationale:
+          'Structured new fee voucher generation and session management modules to integrate cleanly into the legacy MVC 5 pipeline without interrupting active academic cycles.',
+      },
+    ],
+    dataFlow: [
+      { step: '01', from: 'Administrative Staff', to: 'MVC 5 Razor Views', detail: 'Manages student cohorts, attendance grids, and fee records' },
+      { step: '02', from: 'Controllers', to: 'Entity Framework Layer', detail: 'Executes optimized queries with relational tracking' },
+      { step: '03', from: 'Data Layer', to: 'SQL Server', detail: 'Maintains historical institutional data and billing transactions' },
+      { step: '04', from: 'Report Generator', to: 'AWS Production Host', detail: 'Dispatches printable fee vouchers and academic transcripts' },
+    ],
   },
 ];
 export const categories = [

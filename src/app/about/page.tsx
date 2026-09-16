@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { SectionLabel, Arrow } from '@/components/ui';
+import { SectionLabel, Arrow, Tags } from '@/components/ui';
 import { ContactCTA } from '@/components/footer';
 import { pageMetadata } from '@/data/seo';
-import { experience } from '@/data/profile';
+import { experience, technicalSkills } from '@/data/profile';
 export const metadata = pageMetadata(
   'About Jawad',
   'Meet M. Jawad Iqbal, a lead software engineer in Islamabad with 5+ years across full-stack applications, cloud delivery, and secure integrations.',
@@ -99,6 +99,42 @@ export default function About() {
                 <span className="mono">0{i + 1}</span>
                 <h3>{p.title}</h3>
                 <p>{p.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="container section-space" style={{ paddingTop: 0 }}>
+          <figure className="engineering-banner-card">
+            <Image
+              src="/images/engineering-banner.webp"
+              width={1600}
+              height={600}
+              alt="Full-Stack .NET & React Engineer — Architecture, Development, and AWS Cloud Deployment"
+              className="engineering-banner-img"
+            />
+          </figure>
+          <div className="section-heading">
+            <div>
+              <SectionLabel>TECHNICAL TOOLKIT</SectionLabel>
+              <h2>
+                Technologies
+                <br />
+                in production.
+              </h2>
+            </div>
+            <p>
+              From database architecture to responsive frontends and cloud releases.
+            </p>
+          </div>
+          <div className="skills-matrix-grid">
+            {technicalSkills.map((cat, idx) => (
+              <article className="skill-category-card" key={cat.category}>
+                <div className="skill-cat-header">
+                  <span className="mono">0{idx + 1}</span>
+                  <h3>{cat.category}</h3>
+                </div>
+                <p>{cat.summary}</p>
+                <Tags items={cat.skills} />
               </article>
             ))}
           </div>

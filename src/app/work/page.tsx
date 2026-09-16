@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { pageMetadata } from '@/data/seo';
 import { SectionLabel } from '@/components/ui';
 import { WorkGallery } from '@/components/work-gallery';
@@ -23,6 +24,18 @@ export default function Work() {
             </p>
           </div>
         </section>
+        <div className="container work-banner-wrap">
+          <figure className="engineering-banner-card">
+            <Image
+              src="/images/engineering-banner.webp"
+              width={1600}
+              height={600}
+              alt="Full-Stack .NET & React Engineer — SaaS, APIs, AI Integrations, AWS Cloud Delivery"
+              priority
+              className="engineering-banner-img"
+            />
+          </figure>
+        </div>
         <section className="container work-content" aria-label="Projects">
           <WorkGallery />
           <div className="more-work">

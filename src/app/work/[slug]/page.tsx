@@ -4,6 +4,7 @@ import { projects } from '@/data/projects';
 import { pageMetadata, siteUrl } from '@/data/seo';
 import { SectionLabel, Tags, Arrow } from '@/components/ui';
 import { Architecture } from '@/components/architecture';
+import { CaseSidebar } from '@/components/case-sidebar';
 import { ContactCTA } from '@/components/footer';
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -63,11 +64,7 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
           <Architecture project={p} />
         </div>
         <div className="container case-body">
-          <nav className="case-sidebar" aria-label="Case study sections">
-            <a href="#context">01 · The context</a>
-            <a href="#approach">02 · The engineering</a>
-            <a href="#outcomes">03 · What was delivered</a>
-          </nav>
+          <CaseSidebar hasTradeoffs={Boolean(p.tradeoffs && p.tradeoffs.length > 0)} />
           <div className="case-prose">
             <section id="context">
               <SectionLabel>01 / THE CONTEXT</SectionLabel>
@@ -88,8 +85,22 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
               ))}
               <Tags items={p.technologies} />
             </section>
+            {p.tradeoffs && p.tradeoffs.length > 0 && (
+              <section id="tradeoffs">
+                <SectionLabel>03 / ARCHITECTURAL DECISIONS</SectionLabel>
+                <h2>Engineering tradeoffs.</h2>
+                <div className="tradeoffs-grid">
+                  {p.tradeoffs.map((t) => (
+                    <article className="tradeoff-card" key={t.title}>
+                      <h3>{t.title}</h3>
+                      <p>{t.rationale}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
             <section id="outcomes">
-              <SectionLabel>03 / THE DELIVERY</SectionLabel>
+              <SectionLabel>{p.tradeoffs ? '04 / THE DELIVERY' : '03 / THE DELIVERY'}</SectionLabel>
               <h2>What the work made possible.</h2>
               <ul className="outcomes">
                 {p.outcomes.map((o) => (

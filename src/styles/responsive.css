@@ -1120,4 +1120,23 @@ body {
     width: 26px;
     height: 26px;
   }
+  .footer-bottom {
+    padding-bottom: 80px;
+  }
+  .skills-matrix-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .flow-steps-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-actions .button,
+  .form-actions .webmail-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }

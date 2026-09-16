@@ -30,6 +30,25 @@ export function Architecture({
           </div>
         ))}
       </div>
+      {!compact && project.dataFlow && (
+        <div className="flow-pipeline">
+          <div className="flow-pipeline-header">
+            <span>REQUEST & EXECUTION PIPELINE</span>
+            <span>End-to-end execution</span>
+          </div>
+          <div className="flow-steps-grid">
+            {project.dataFlow.map((s) => (
+              <div className="flow-step" key={s.step}>
+                <div className="flow-step-meta">
+                  <span className="step-num">{s.step}</span>
+                  <span className="step-route">{s.from} → {s.to}</span>
+                </div>
+                <p>{s.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <figcaption>{compact ? project.proof : project.architectureNote}</figcaption>
     </figure>
   );

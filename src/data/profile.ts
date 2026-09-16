@@ -96,3 +96,32 @@ export const engagements = [
   'Ongoing retainers',
   'Contract engineering',
 ];
+
+export const technicalSkills = [
+  {
+    category: 'Backend & Architecture',
+    summary: 'Robust, maintainable server-side services, identity, and distributed APIs.',
+    skills: ['C#', 'ASP.NET Core', '.NET 8 / 9', 'RESTful APIs', 'GraphQL', 'IdentityServer', 'OAuth 2.0 / OIDC', 'JWT Auth', 'Clean Architecture'],
+  },
+  {
+    category: 'Frontend Engineering',
+    summary: 'Type-safe, accessible client interfaces with component-driven design.',
+    skills: ['React', 'TypeScript', 'Next.js', 'HTML5 / CSS3', 'Component Systems', 'WCAG 2.1 AA a11y', 'Client-Side State'],
+  },
+  {
+    category: 'Databases & Persistence',
+    summary: 'Normalized schema modeling, relational integrity, and high-performance ORMs.',
+    skills: ['PostgreSQL', 'Microsoft SQL Server', 'Entity Framework Core', 'NHibernate', 'TypeORM', 'Query Optimization'],
+  },
+  {
+    category: 'Cloud & Infrastructure',
+    summary: 'Containerized deployment, cloud infrastructure, and reliable release pipelines.',
+    skills: ['AWS (ECS, EKS, S3, RDS)', 'Docker', 'Kubernetes', 'DigitalOcean', 'CI/CD Pipelines', 'Production Troubleshooting'],
+  },
+  {
+    category: 'AI & Connected Integrations',
+    summary: 'Autonomous agent action tooling, OpenAPI schemas, and third-party APIs.',
+    skills: ['Custom GPTs', 'GPT Actions', 'OpenAPI 3.1.1', 'Twilio API', 'Firebase Services', 'Stripe Payments'],
+  },
+];
+

@@ -18,35 +18,66 @@ function readForm(form: HTMLFormElement): Inquiry {
 export function EnquiryForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [notice, setNotice] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  function getDraftDetails() {
+    const form = formRef.current;
+    if (!form || !form.reportValidity()) return null;
+    const inquiry = readForm(form);
+    const subject = `${inquiry.type} enquiry — ${inquiry.name}`;
+    const body = bodyText(inquiry);
+    return { subject, body };
+  }
+
+  function openGmail() {
+    const draft = getDraftDetails();
+    if (!draft) return;
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}&su=${encodeURIComponent(draft.subject)}&body=${encodeURIComponent(draft.body)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+    setNotice('Opened a draft in Gmail. Review and send your message there.');
+  }
+
+  function openOutlook() {
+    const draft = getDraftDetails();
+    if (!draft) return;
+    const url = `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(profile.email)}&subject=${encodeURIComponent(draft.subject)}&body=${encodeURIComponent(draft.body)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+    setNotice('Opened a draft in Outlook Web. Review and send your message there.');
+  }
+
   async function copy() {
     const form = formRef.current;
     if (!form || !form.reportValidity()) return;
     try {
       await navigator.clipboard.writeText(bodyText(readForm(form)));
-      setNotice('Enquiry copied. Paste it into an email to ' + profile.email + '.');
+      setCopied(true);
+      setNotice('Enquiry copied to clipboard. You can paste it into an email to ' + profile.email + '.');
+      setTimeout(() => setCopied(false), 3500);
     } catch {
       setNotice(
         'Clipboard access is unavailable. You can email Jawad directly using the email link on this page.',
       );
     }
   }
+
   return (
     <form
       ref={formRef}
       className="enquiry-form"
       onSubmit={(e) => {
         e.preventDefault();
-        const inquiry = readForm(e.currentTarget);
-        const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(`${inquiry.type} enquiry — ${inquiry.name}`)}&body=${encodeURIComponent(bodyText(inquiry))}`;
+        const draft = getDraftDetails();
+        if (!draft) return;
+        const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(draft.subject)}&body=${encodeURIComponent(draft.body)}`;
         window.location.href = mailto;
         setNotice(
-          'Your email app should open with a draft. Review it and send it there. Nothing has been submitted by this website.',
+          'Your default email app should open with a draft. Review it and send it there.',
         );
       }}
     >
       <h2>Start a conversation.</h2>
       <p>
-        A few details help me understand what you need. This prepares a draft in your email app.
+        A few details help me understand what you need. Choose your preferred way to send.
       </p>
       <div className="field-row">
         <div className="field">
@@ -88,15 +119,34 @@ export function EnquiryForm() {
       </div>
       <div className="form-actions">
         <button type="submit" className="button button-blue">
-          Prepare email <Arrow diagonal />
+          Default Mail App <Arrow diagonal />
         </button>
-        <button type="button" className="text-link" onClick={copy}>
-          Copy enquiry
+        <button type="button" className="button button-outline webmail-btn" onClick={openGmail}>
+          Open in Gmail <Arrow diagonal />
+        </button>
+        <button type="button" className="button button-outline webmail-btn" onClick={openOutlook}>
+          Open in Outlook <Arrow diagonal />
+        </button>
+        <button type="button" className="text-link copy-link-btn" onClick={copy}>
+          {copied ? '✓ Copied to clipboard' : 'Copy enquiry'}
         </button>
       </div>
-      <p className="form-notice" role="status">
-        {notice}
-      </p>
+      <div className="form-secondary-actions">
+        <span>Prefer instant messaging?</span>
+        <a
+          href={profile.whatsapp.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-inline-link"
+        >
+          Chat on WhatsApp <Arrow diagonal />
+        </a>
+      </div>
+      {notice && (
+        <p className="form-notice" role="status">
+          {notice}
+        </p>
+      )}
     </form>
   );
 }
