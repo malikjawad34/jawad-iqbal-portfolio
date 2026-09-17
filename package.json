@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "check": "npm run typecheck && npm run lint",
+    "record": "node scripts/record-portfolio.mjs",
     "format": "prettier --write src scripts *.mjs *.ts *.json README.md docs"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.0.0",
     "prettier": "^3.9.6",
+    "puppeteer-core": "^25.11.0",
     "tailwindcss": "^4.1.0",
     "typescript": "^5.9.0"
   }
