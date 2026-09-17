@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { profile } from '@/data/profile';
 export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://jawad-iqbal.safelyqdev.chatgpt.site'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://jawadiqbal.pages.dev'
 ).replace(/\/$/, '');
 export function pageMetadata(title: string, description: string, path = '/'): Metadata {
   return {
