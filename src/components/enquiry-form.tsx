@@ -3,8 +3,6 @@ import { useRef, useState } from 'react';
 import { profile } from '@/data/profile';
 import { Arrow } from './ui';
 
-const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '';
-
 export function EnquiryForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -22,16 +20,15 @@ export function EnquiryForm() {
     const formData = new FormData(form);
 
     const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
     const type = String(formData.get('type') || 'General');
-
-    formData.set('access_key', ACCESS_KEY);
-    formData.set('subject', `Portfolio Inquiry: ${type} — ${name}`);
-    formData.set('from_name', `${name} via Portfolio`);
+    const message = String(formData.get('message') || '').trim();
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('/api/contact/', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, type, message }),
       });
 
       const data = await response.json();
