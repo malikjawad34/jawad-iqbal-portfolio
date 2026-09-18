@@ -87,16 +87,16 @@
   position: relative;
   min-height: 550px;
   width: 100%;
-  max-width: 530px;
+  max-width: 440px;
   justify-self: center;
 }
 .cinematic-portrait {
   position: absolute;
-  inset: 5px 42px 38px;
+  inset: 0 0 38px 0;
   overflow: hidden;
-  border-radius: 220px 220px 8px 8px;
+  border-radius: 220px 220px 12px 12px;
   border: 1px solid rgba(123, 155, 255, 0.35);
-  box-shadow: 0 0 0 8px rgba(49, 92, 236, 0.08), 0 30px 80px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 1px rgba(123, 155, 255, 0.15), 0 0 50px rgba(49, 92, 236, 0.15), 0 25px 60px rgba(0, 0, 0, 0.6);
 }
 .cinematic-portrait img {
   object-fit: cover;
@@ -242,10 +242,7 @@
 }
 @media (max-width: 1050px) {
   .cinematic-hero .hero-main { gap: 30px; }
-  .cinematic-stage { min-height: 500px; }
-  .floating-project { width: 230px; padding: 18px; }
-  .floating-platform { left: 0; }
-  .floating-ai { right: 0; bottom: 88px; }
+  .cinematic-stage { max-width: 400px; min-height: 500px; }
 }
 @media (max-width: 760px) {
   .cinematic-hero .hero-main {
@@ -254,22 +251,14 @@
     gap: 40px;
   }
   .cinematic-hero h1 { font-size: clamp(44px, 10vw, 70px); }
-  .cinematic-stage { max-width: 470px; min-height: 520px; }
+  .cinematic-stage { max-width: 380px; min-height: 480px; }
   .cinematic-hero .hero-actions { flex-wrap: wrap; gap: 18px 25px; }
   .cinematic-hero .hero-kicker { font-size: 11px; }
 }
 @media (max-width: 440px) {
-  .cinematic-stage { min-height: 480px; }
-  .cinematic-portrait { inset: 5px 15px 38px; }
-  .floating-project { width: 200px; padding: 15px; }
-  .floating-project strong { font-size: 20px; }
-  .floating-detail { font-size: 12px; }
-  .floating-platform { top: 40px; left: 0; transform: rotate(-3deg); }
-  .floating-ai { bottom: 95px; right: 0; transform: rotate(3deg); }
+  .cinematic-stage { max-width: 320px; min-height: 420px; }
+  .cinematic-portrait { inset: 0 0 32px 0; border-radius: 170px 170px 10px 10px; }
   .portrait-caption { left: 16px; bottom: 20px; }
   .portrait-caption span { font-size: 11px; letter-spacing: 0; }
   .cinematic-index { letter-spacing: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .floating-project { transition: none; }
 }
